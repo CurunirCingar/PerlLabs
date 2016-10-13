@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/local/bin/perl -w 
 use CGI qw(param);
 use CGI::Carp qw(fatalsToBrowser);
 print("Content-type: text/html\n\n");
