@@ -13,18 +13,49 @@ print("Content-type: text/html\n\n");
 	}
 	else
 	{
-		print("Файл $filename не найден!");
+		print("”айл $filename не найден!");
 		exit;
 	}
 	
 	sub ReadFile
 	{
-		open(F1,'<', $filename) || die("Файл $filename не открылся");
+		open(F1,'<', $filename) || die("”айл $filename не открылся");
 		open(F2,'>', $outFilename);
+		
 		@file = <F1>;
-		for(@file)
+		$fileStr;
+		for (@file)
 		{
-			$_=~s/<.*?>//gi;
-			print F2 $_;
+			chomp;
+			$fileStr .=  $_;
 		}
+		
+		$fileStr=~s%&nbsp;%%g;
+		@fileStrArr=split(%<tr>%, $fileStr);
+		
+		while(@fileStrArr)
+		{
+			~m%<td>(.*?)</td>(.*?)<td>(.*?)</td>%i;
+			print F2 "$1\t$2\n";
+		}
+		
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	

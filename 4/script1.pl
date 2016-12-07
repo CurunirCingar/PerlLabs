@@ -60,9 +60,17 @@ print("Content-type: text/html\n\n");
 		$i = 0;
 		$j = 0;
 		
+		foreach(@headerArr)
+		{
+			chomp;
+			print F2 "$_\t";
+		}
+		print F2 "\n";
+		
 		for($i = 1; $i < @fileStr; $i++)
 		{
-			print F2 "$i. @fileStr[$i]\n";
+			chomp($fileStr[$i]);
+			print F2 "$i. $fileStr[$i]\n";
 			
 			@tempStr = split(/\t/, @fileStr[$i]);
 			
@@ -72,9 +80,7 @@ print("Content-type: text/html\n\n");
 				foreach(@tempStr)
 				{
 					print("<TD>$_");
-					
 				}
-				
 			}
 			else
 			{
