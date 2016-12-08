@@ -13,33 +13,35 @@ print("Content-type: text/html\n\n");
 	}
 	else
 	{
-		print("”айл $filename не найден!");
+		print("Файл $filename не найден!");
 		exit;
 	}
+	print("<H2 ALIGN=center><a href=index.html>На главную</a></H2>");
 	
 	sub ReadFile
 	{
-		open(F1,'<', $filename) || die("”айл $filename не открылся");
+		open(F1,'<', $filename) || die("Р¤Р°Р№Р» $filename РЅРµ РѕС‚РєСЂС‹Р»СЃВ¤");
 		open(F2,'>', $outFilename);
 		
-		@file = <F1>;
-		$fileStr;
-		for (@file)
+		while(<F1>) 
 		{
 			chomp;
-			$fileStr .=  $_;
+			$str.=$_;
 		}
 		
-		$fileStr=~s%&nbsp;%%g;
-		@fileStrArr=split(%<tr>%, $fileStr);
+		$str =~ s/&nbsp;//g;
+		@a = split(/<tr>/, $str);
+		$word1 = "\d{1,2}\.\d{1,2}\.\d{2,4}";
+		$word2 = "\d{1,2}\.\d{1,2}\.\d{2,4}";
+		$word3 = "\d{1,3}";
 		
-		while(@fileStrArr)
+		foreach(@a) 
 		{
-			~m%<td>(.*?)</td>(.*?)<td>(.*?)</td>%i;
-			print F2 "$1\t$2\n";
+			$_ =~m/>(\d{1,2}\.\d{1,2}\.\d{2,4})\s*-\s*(\d{1,2}\.\d{1,2}\.\d{2,4}).*?>(\d{1,3})</i;
+			if($1 && $2 && $3) { print F2 "$1-$2\t$3\n"; }
 		}
 		
-		
+		print("<H3 align=center>Сформированный файл \"Data.dat\" находится в текущем каталоге.</H2>");
 	}
 	
 	
